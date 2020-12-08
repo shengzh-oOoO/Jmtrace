@@ -1,0 +1,5 @@
+agent/JmtraceAgent$1.class
+agent/JmtraceAgent.class
+agent/JmtraceMethodAdapter.class
+agent/MyPrint.class
+agent/JmtraceClassAdapter.class
