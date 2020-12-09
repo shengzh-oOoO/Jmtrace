@@ -13,6 +13,7 @@ public class JmtraceClassAdapter extends ClassVisitor {
     @Override
     public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions){
         MethodVisitor mv = super.visitMethod(access, name, descriptor, signature, exceptions);
-        return new JmtraceMethodAdapter(mv, verbose);
+        MethodVisitor ret = new JmtraceMethodAdapter(mv, verbose);
+        return ret;
     }
 }

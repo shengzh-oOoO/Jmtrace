@@ -66,6 +66,17 @@ public class JmtraceMethodAdapter extends MethodVisitor {
     @Override
     public void visitFieldInsn(int opcode, String owner, String name, String descriptor) {
         switch (opcode){
+        	case Opcodes.GETSTATIC:
+                super.visitLdcInsn(owner);
+                super.visitLdcInsn(name);
+                super.visitMethodInsn(Opcodes.INVOKESTATIC, Type.getInternalName(MyPrint.class), "PrintGETSTATIC", "(Ljava/lang/String;Ljava/lang/String;)V", false);
+                break;
+            case Opcodes.PUTSTATIC:
+                super.visitLdcInsn(owner);
+                super.visitLdcInsn(name);
+                super.visitMethodInsn(Opcodes.INVOKESTATIC, Type.getInternalName(MyPrint.class), "PrintPUTSTATIC", "(Ljava/lang/String;Ljava/lang/String;)V", false);
+                break;
+
             case Opcodes.GETFIELD:
                 super.visitInsn(Opcodes.DUP);
                 super.visitLdcInsn(name);
@@ -92,16 +103,6 @@ public class JmtraceMethodAdapter extends MethodVisitor {
 
                     super.visitInsn(Opcodes.SWAP);
                 }
-                break;
-            case Opcodes.GETSTATIC:
-                super.visitLdcInsn(owner);
-                super.visitLdcInsn(name);
-                super.visitMethodInsn(Opcodes.INVOKESTATIC, Type.getInternalName(MyPrint.class), "PrintGETSTATIC", "(Ljava/lang/String;Ljava/lang/String;)V", false);
-                break;
-            case Opcodes.PUTSTATIC:
-                super.visitLdcInsn(owner);
-                super.visitLdcInsn(name);
-                super.visitMethodInsn(Opcodes.INVOKESTATIC, Type.getInternalName(MyPrint.class), "PrintPUTSTATIC", "(Ljava/lang/String;Ljava/lang/String;)V", false);
                 break;
             default:
         }
